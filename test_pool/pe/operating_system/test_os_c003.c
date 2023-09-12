@@ -32,11 +32,16 @@ payload()
   data = val_pe_reg_read(ID_AA64PFR0_EL1);
   data = (data & 0xF00000) >> 20;
 
-  if ((data == 0x0) || (data == 0x1))
+  if ((data == 0x0) || (data == 0x1)) {
+        val_print(ACS_PRINT_ERR,
+        "\n       Test passed for: %d", index);
         val_set_status(index, RESULT_PASS(TEST_NUM, 1));
-  else
+  }
+  else {
+        val_print(ACS_PRINT_ERR,
+        "\n       Test failed for: %d", index);
         val_set_status(index, RESULT_FAIL(TEST_NUM, 1));
-
+  }
   return;
 
 }
